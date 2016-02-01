@@ -7,7 +7,7 @@
             SelectedItem="{Binding ContactoSeleccionado,Mode=TwoWay}">
   <ListView.ItemTemplate>
     <DataTemplate>
-      <TextCell Text="{Binding nombreCompleto}"></TextCell>
+      <ImageCell ImageSource="monoXamarin2.jpg" Text="{Binding nombreCompleto}"></ImageCell>
     </DataTemplate>
   </ListView.ItemTemplate>
 </ListView>

@@ -7,26 +7,26 @@ using RestSharp.Portable.HttpClient;
 
 namespace RedContactos.Service
 {
-    public class ServicioDatos:IServicioMovil
+    public class ServicioDatos : IServicioMovil
     {
         private RestClient client;
 
         public ServicioDatos()
         {
-            client=new RestClient(Cadenas.Url);
-           
+            client = new RestClient(Cadenas.Url);
+
 
         }
         public async Task<UsuarioModel> ValidarUsuario(UsuarioModel usuario)
         {
-            var request=new RestRequest("Usuario");
-            
-            request.Method=Method.GET;
+            var request = new RestRequest("Usuario");
+
+            request.Method = Method.GET;
             request.AddQueryParameter("login", usuario.login);
             request.AddQueryParameter("password", usuario.password);
 
             var response = await client.Execute<UsuarioModel>(request);
-            if(response.IsSuccess)
+            if (response.IsSuccess)
                 return response.Data;
             return null;
 
@@ -38,7 +38,7 @@ namespace RedContactos.Service
 
             request.Method = Method.GET;
             request.AddQueryParameter("login", login);
-            
+
 
             var response = await client.Execute<bool>(request);
             if (response.IsSuccess)
@@ -53,7 +53,7 @@ namespace RedContactos.Service
                 Method = Method.POST
             };
             request.AddJsonBody(usuario);
-           var response = await client.Execute<UsuarioModel>(request);
+            var response = await client.Execute<UsuarioModel>(request);
             if (response.IsSuccess)
                 return response.Data;
             return null;
@@ -61,7 +61,7 @@ namespace RedContactos.Service
 
         public async Task<List<ContactoModel>> GetContactos(bool actuales, int id)
         {
-            var request = new RestRequest("Contactos");
+            var request = new RestRequest("Contacto");
 
             request.Method = Method.GET;
             request.AddQueryParameter("id", id);
@@ -76,7 +76,7 @@ namespace RedContactos.Service
 
         public async Task<ContactoModel> AddContacto(ContactoModel contacto)
         {
-            var request = new RestRequest("Contactos")
+            var request = new RestRequest("Contacto")
             {
                 Method = Method.POST
             };
@@ -89,13 +89,13 @@ namespace RedContactos.Service
 
         public async Task DelContacto(ContactoModel contacto)
         {
-            var request = new RestRequest("Contactos")
+            var request = new RestRequest("Contacto")
             {
                 Method = Method.DELETE
             };
             request.AddJsonBody(contacto);
             await client.Execute(request);
-            
+
         }
 
         public async Task<List<MensajeModel>> GetMensajes(int id)
@@ -104,7 +104,7 @@ namespace RedContactos.Service
 
             request.Method = Method.GET;
             request.AddQueryParameter("id", id);
-            
+
 
 
             var response = await client.Execute<List<MensajeModel>>(request);
@@ -115,10 +115,7 @@ namespace RedContactos.Service
 
         public async Task<MensajeModel> AddMensaje(MensajeModel mensaje)
         {
-            var request = new RestRequest("Mensaje")
-            {
-                Method = Method.POST
-            };
+            var request = new RestRequest("Mensaje") { Method = Method.POST };
             request.AddJsonBody(mensaje);
             var response = await client.Execute<MensajeModel>(request);
             if (response.IsSuccess)
@@ -133,8 +130,8 @@ namespace RedContactos.Service
                 Method = Method.PUT
             };
             request.AddJsonBody(mensaje);
-           await client.Execute(request);
-           
+            await client.Execute(request);
+
         }
     }
 }

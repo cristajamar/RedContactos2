@@ -8,7 +8,7 @@
                VerticalOptions="FillAndExpand"
                >
     
-  
+    <Image Source="monoXamarin1.jpg" Aspect="AspectFit"></Image>
     <Label Text="Login"/>
     <Entry Text="{Binding Usuario.login}"/>
     <Label Text="Password"/>
